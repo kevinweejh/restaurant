@@ -2,8 +2,8 @@ import { createElement } from './utils.js';
 
 export default () => {
     const homeTab = () => {
-        const homeTab = createElement('div', ['flex', 'flex-col', 'mb-6'], '', 'homeTab');
-        const homeHeadline = createElement('h1', ['text-2xl', 'text-white', 'p-6', 'text-center', 'w-max', 'flex', 'mx-auto'], 'Restaurant de la Victoire');
+        const homeTab = createElement('div', ['flex', 'flex-col', 'bg-black/50', 'w-1/2', 'mx-auto'], '', 'homeTab');
+        const homeHeadline = createElement('h1', ['text-3xl', 'font-semibold', 'text-white', 'p-6', 'text-center', 'w-max', 'flex', 'mx-auto'], 'Restaurant de la Victoire');
         homeTab.appendChild(homeHeadline);
 
         const homeSubtext = createElement('p', ['text-lg', 'text-white', 'text-center', 'w-max', 'flex', 'mx-auto'], 'Best restaurant from here to Mars and back');

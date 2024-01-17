@@ -5,7 +5,7 @@ export default () => {
         const menuTab = createElement('div', ['flex', 'flex-col', 'w-1/2', 'text-center', 'mx-auto'], '', 'menuTab');
         const menuSections = ['Starters', 'Mains', 'Desserts', 'Beverages'];
         menuSections.forEach((section) => {
-            const sectionDiv = createElement('div', ['bg-black/50', 'm-3', 'text-white', 'font-semibold', 'p-3'], section, section);
+            const sectionDiv = createElement('div', ['bg-black/50', 'my-6', 'text-white', 'font-semibold', 'p-3', 'text-2xl'], section, section);
             menuTab.appendChild(sectionDiv);
         })
 
@@ -58,8 +58,8 @@ export default () => {
         ];
 
         menuItems.forEach((item) => {
-            const menuItemName = createElement('p', ['text-white'], `${item.name}`);
-            const menuItemPrice = createElement('p', ['text-white', 'font-normal'], `Price: ${item.price}`);
+            const menuItemName = createElement('p', ['text-white', 'text-base'], `${item.name}`);
+            const menuItemPrice = createElement('p', ['text-white', 'font-normal', 'text-base'], `Price: ${item.price}`);
             const menuItemDiv = createElement('div', ['m-3'], '');
             menuItemDiv.appendChild(menuItemName);
             menuItemDiv.appendChild(menuItemPrice);
