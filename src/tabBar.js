@@ -23,10 +23,4 @@ export default () => {
 
     const container = document.getElementById('content');
     container.appendChild(tabBar);
-
-    return {
-        homeTabBtn: document.getElementById('homeTabBtn'), 
-        menuTabBtn: document.getElementById('menuTabBtn'), 
-        contactTabBtn: document.getElementById('contactTabBtn'), 
-    }
 }

@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 InitialPageLoad();
 
-const { homeTabBtn, menuTabBtn, contactTabBtn } = TabBar();
+TabBar();
 
 const { tabContentDiv } = TabContent();
 HomeTab();
