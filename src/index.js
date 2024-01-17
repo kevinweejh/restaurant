@@ -20,5 +20,13 @@ MenuTab();
 ContactTab();
 
 const tabSwitching = () => {
-
+    const tabBtns = document.querySelectorAll('[id$="Btn"]');
+    tabBtns.forEach((btn) => {
+        console.log(btn);
+        btn.addEventListener('click', () => {
+            document.getElementById(btn.id.slice(0,-3)).classList.toggle('hidden');
+        })
+    })
 }
+
+tabSwitching();
