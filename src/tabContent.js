@@ -6,7 +6,13 @@ export default () => {
         
         const container = document.getElementById('content');
         container.appendChild(tabContentDiv);
+
+        
     }
 
     createTabContent();
+
+    return {
+        tabContentDiv: document.getElementById('tabContent')
+    }
 }

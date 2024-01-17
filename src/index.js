@@ -14,22 +14,27 @@ InitialPageLoad();
 
 const { homeTabBtn, menuTabBtn, contactTabBtn } = TabBar();
 
-TabContent();
+const { tabContentDiv } = TabContent();
 HomeTab();
-MenuTab();
-ContactTab();
 
 const tabSwitching = () => {
     const tabBtns = document.querySelectorAll('[id$="Btn"]');
-    const tabs = document.querySelectorAll('[id$="Tab"]');
+    const btnMapping = {
+        'homeTabBtn': HomeTab,
+        'menuTabBtn': MenuTab,
+        'contactTabBtn': ContactTab,
+    }
 
     tabBtns.forEach((btn) => {
-        console.log(btn);
         btn.addEventListener('click', () => {
-            tabs.forEach((tab) => {
-                tab.classList.add('hidden');
-            })
-            document.getElementById(btn.id.slice(0,-3)).classList.toggle('hidden');
+            tabContentDiv.innerHTML = '';
+
+            const moduleFunction = btnMapping[btn.id];
+            if (moduleFunction) {
+                moduleFunction();
+            } else {
+                console.error('No matching module function found for button:' , btn.id);
+            }
         })
     })
 }
