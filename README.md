@@ -1,6 +1,9 @@
 # Restaurant Page
 
-This project is a practical exploration of Webpack configuration and Tailwind CSS integration, building upon The Odin Project's Restaurant Page. The primary focus is on setting up and understanding the differences in Webpack configurations for development and production environments, as well as integrating Tailwind CSS for styling, and an intro to GitHub Actions.
+This project is a practical exploration of Webpack configuration and Tailwind CSS integration, building upon The Odin Project's Restaurant Page. The primary focus is on setting up and understanding the differences in Webpack configurations for development and production environments, as well as integrating Tailwind CSS for styling, and an intro to GitHub Actions. 
+
+Check out the live version here: [Restaurant Page Demo](https://kevinweejh.github.io/restaurant/).
+
 
 ## Project Overview
 
