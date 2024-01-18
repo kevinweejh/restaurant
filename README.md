@@ -1,18 +1,19 @@
 # Restaurant Page
 
-This project is a practical exploration of Webpack configuration and Tailwind CSS integration, building upon The Odin Project's Restaurant Page. The primary focus is on setting up and understanding the differences in Webpack configurations for development and production environments, as well as integrating Tailwind CSS for styling.
+This project is a practical exploration of Webpack configuration and Tailwind CSS integration, building upon The Odin Project's Restaurant Page. The primary focus is on setting up and understanding the differences in Webpack configurations for development and production environments, as well as integrating Tailwind CSS for styling, and an intro to GitHub Actions.
 
 ## Project Overview
 
 ### Purpose
 
-This project is designed to familiarize myself with extended Webpack configuration and Tailwind CSS integration. It demonstrates how to handle different build requirements for development and production environments in Webpack and effectively configure Tailwind CSS in a web development project.
+This project is designed to familiarize myself with extended Webpack configuration and Tailwind CSS integration. It demonstrates how to handle different build requirements for development and production environments in Webpack and effectively configure Tailwind CSS in a web development project. As an add-on, this project provided an opportunity to learn about deployment via GitHub Actions.
 
 ### Key Features
 
 - Use of ES6 modules for JavaScript code organization.
 - Extended Webpack configuration with separate setups for development and production.
 - Integration of Tailwind CSS within the Webpack environment.
+- Use of GitHub Actions to build and deploy to GitHub Pages.
 
 ## Technical Details
 
@@ -46,11 +47,18 @@ This project is designed to familiarize myself with extended Webpack configurati
 - The `./style.css` file, containing Tailwind directives, should be imported only once in the entry point JavaScript file. Do not link this stylesheet directly in the HTML template or other modules.
 - Caution: Avoid including any CSS output files in the `/src` directory targeted by the Tailwind `content` configuration to prevent an infinite rebuilding loop.
 
+### GitHub Actions Deployment
+
+- GitHub Actions is used by way of the `deploy.yml` file nested in the `.github/workflow` directory. 
+- Deploying in this manner allows the generated contents of the `/dist` directory to be kept out of the repo, which has the following benefits:
+  - Reduce repo size
+  - Avoid merge conflicts of the generated files
+
 ## Setup and Installation
 
 ### Prerequisites
 
-- Node.js (specify the required version)
+Node.js v21.1.0
 
 ### Installation
 
@@ -60,32 +68,72 @@ npm install
 
 ### Running the Project
 
-- **For development:**
+#### For development:
 
-  ```bash
-  npm start
-  ```
+```bash
+npm start
+```
 
-- **For production:**
+#### For production:
 
-  ```bash
-  npm run build
-  ```
+```bash
+npm run build
+```
 
 ## Usage and Examples
 
-> (To be added later with screenshots and usage examples.)
+### Deploying using GitHub Actions
+
+This is done by adding a 'workflow' YAML file, which really reads as step-by-step instructions for GitHub Actions to perform, as follows: 
+```yml
+# .github/workflows/deploy.yml
+name: Build and Deploy to GitHub Pages
+
+on:                 # Workflow triggered on detection 
+  push:             # of push events made to
+    branches:       # ...     
+      - main        # the main branch
+
+permissions:        # Workflow provided with permission
+  contents: write   # to write changes, e.g. Save output files
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️                               # Checkout files from repo
+        uses: actions/checkout@v3                       # using this GitHub Action
+
+      - name: Install Dependencies 🌐                   # Install dependencies 
+        run: npm install                                # using this command
+
+      - name: Build 🔧                                  # Production build
+        run: npm run build                              # using this command
+
+      - name: Deploy 🚀                                 # Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4   # using this GitHub Action
+        with:                                           # ...
+          folder: dist                                  # and save output in /dist
+```
+![GitHub Actions deployment](src/githubActionsScreenshot.png)
+
+Once this 'workflow' file is committed and pushed to your repo on GitHub, and you have configured your project to deploy using GitHub Actions (as above), the build + deployment process begins automagically. 
+
+And voilà - your project is up on GitHub Pages. 
+
+![Clickthrough of site UI](src/siteClickthrough.gif)
 
 ## Contribution and Support
 
 ### Contributing
 
-> (Guidelines for contributing, such as how to submit pull requests, coding standards, etc.)
+While this project is primarily a personal learning exercise, I welcome anyone interested in using it for their learning or experimenting. Feel free to fork the repository, try out different configurations, and share your findings. If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
 ### Support
 
-For support or to report issues, contact me at [kevinweejh@gmail.com](mailto:kevinweejh@gmail.com) or [hello@codebykevin.dev](mailto:hello@codebykevin.dev).
+For questions regarding the setup and configuration of this project, feel free to reach out to me at [kevinweejh@gmail.com](mailto:kevinweejh@gmail.com) or [hello@codebykevin.dev](mailto:hello@codebykevin.dev). I'll be more than happy to provide guidance or discuss the learning aspects of this project.
 
 ## Acknowledgements and References
 
-This project draws inspiration from [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page) and utilizes resources from [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Webpack](https://webpack.js.org/guides/) documentation, along with third-party plugins like [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/), [css-minimizer-webpack-plugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/), and [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/).
+This project draws inspiration from [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-restaurant-page) and utilizes resources from [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Webpack](https://webpack.js.org/guides/) documentation, [GitHub Pages Deploy Action](https://github.com/JamesIves/github-pages-deploy-action) for deployment, along with third-party plugins like [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/), [css-minimizer-webpack-plugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/), and [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/).
