@@ -98,7 +98,7 @@ on:                 # Workflow triggered on detection
       - main        # the main branch
 
 permissions:        # Workflow provided with permission
-  contents: write   # to write changes, e.g. Save output files
+  contents: write   # to write changes, e.g. Save generated output files
 
 jobs:
   build-and-deploy:
@@ -106,24 +106,26 @@ jobs:
 
     steps:
       - name: Checkout 🛎️                               # Checkout files from repo
-        uses: actions/checkout@v3                       # using this GitHub Action
+        uses: actions/checkout@v4                       # by using this GitHub Action
 
       - name: Install Dependencies 🌐                   # Install dependencies 
-        run: npm install                                # using this command
+        run: npm install                                # by running this command
 
-      - name: Build 🔧                                  # Production build
-        run: npm run build                              # using this command
+      - name: Build 🔧                                  # Generate dist directory content
+        run: npm run build                              # by running this command
 
-      - name: Deploy 🚀                                 # Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4   # using this GitHub Action
-        with:                                           # ...
-          folder: dist                                  # and save output in /dist
+      - name: Deploy 🚀                                 # Deploy my site
+        uses: JamesIves/github-pages-deploy-action@v4   # by using this GitHub Action
+        with:     
+          folder: dist                                  # by pushing dist directory content
+          branch: gh-pages                              # to the gh-pages branch
+          
 ```
-![GitHub Actions deployment](src/githubActionsScreenshot.png)
+![GitHub Pages deployment](src/githubDeploymentBranchScreenshot.png)
 
-Once this 'workflow' file is committed and pushed to your repo on GitHub, and you have configured your project to deploy using GitHub Actions (as above), the build + deployment process begins automagically. 
+Once this 'workflow' file is committed and pushed to your repo on GitHub, and you have configured your project to deploy using the `gh-pages` branch, the build + deployment process begins automagically. 
 
-And voilà - your project is up on GitHub Pages. 
+And voilà - your project is up on GitHub Pages. Any new changes pushed to the `main` branch will trigger the process to repeat, and GitHub Pages will serve the newly generated contents of the `gh-pages` branch.
 
 ![Clickthrough of site UI](src/siteClickthrough.gif)
 
