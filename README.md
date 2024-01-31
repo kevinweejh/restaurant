@@ -52,7 +52,7 @@ This project is designed to familiarize myself with extended Webpack configurati
 
 ### GitHub Actions Deployment
 
-- GitHub Actions is used by way of the `deploy.yml` file nested in the `.github/workflow` directory. 
+- GitHub Actions is used by way of the `deploy.yml` file nested in the `.github/workflows` directory. 
 - Deploying in this manner allows the generated contents of the `/dist` directory to be kept out of the repo, which has the following benefits:
   - Reduce repo size
   - Avoid merge conflicts of the generated files
@@ -87,7 +87,7 @@ npm run build
 
 ### Deploying using GitHub Actions
 
-This is done by adding a 'workflow' YAML file, which really reads as step-by-step instructions for GitHub Actions to perform, as follows: 
+This is done by adding a YAML file which really reads as step-by-step instructions for GitHub Actions to perform, as follows: 
 ```yml
 # .github/workflows/deploy.yml
 name: Build and Deploy to GitHub Pages
